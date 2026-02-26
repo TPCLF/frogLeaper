@@ -1,0 +1,25 @@
+node:
+  role: inference
+  description: "Token generation only via llama.cpp"
+
+hardware_profile:
+  host_label: "ryzen7-2700x_62gb_rtx3050_8gb"
+  target_mode: "gpu_inference"
+  notes:
+    - "Prefer CUDA build of llama.cpp"
+    - "Set n_gpu_layers to fit 8GB VRAM"
+
+llama:
+  server_bin: "/opt/llama.cpp/build/bin/llama-server"
+  model_path: "/models/qwen2.5-14b-instruct-q4_k_m.gguf"
+  host: "0.0.0.0"
+  port: 8080
+  ctx_size: 12288
+  n_gpu_layers: 33
+  threads: 12
+  batch: 512
+
+api:
+  host: "0.0.0.0"
+  port: 9000
+  timeout_s: 180

@@ -1,0 +1,29 @@
+node:
+  role: orchestrator
+  description: "Prompt orchestration, memory, and tool-call JSON handling"
+
+hardware_profile:
+  host_label: "i7-3770S_16GB_GTX960"
+  target_mode: "cpu_orchestration"
+  notes:
+    - "Keep orchestrator inference disabled for current hardware"
+    - "Reserve GPU for UI/utility tasks"
+
+inference:
+  base_url: "http://192.168.1.50:9000"
+  model: "qwen2.5-14b-instruct-q4_k_m.gguf"
+  temperature: 0.2
+  top_p: 0.9
+  max_tokens: 768
+  stream: true
+
+memory:
+  db_path: "/app/data/memory.db"
+  max_context_messages: 24
+  summary_trigger_messages: 40
+  embedding_dim: 384
+
+network:
+  api_host: "0.0.0.0"
+  api_port: 8000
+  request_timeout_s: 120
