@@ -1,0 +1,23 @@
+[Unit]
+Description=LLM Co-op Inference API (llama.cpp backend)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=user
+Group=user
+WorkingDirectory=/home/user/leapFrog/inference-node
+EnvironmentFile=/home/user/leapFrog/inference-node/.env
+ExecStart=/home/user/leapFrog/inference-node/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 9000
+Restart=always
+RestartSec=3
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=false
+
+[Install]
+WantedBy=multi-user.target

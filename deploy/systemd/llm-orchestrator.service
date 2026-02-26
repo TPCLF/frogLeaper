@@ -1,0 +1,24 @@
+[Unit]
+Description=LLM Co-op Orchestrator API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=user
+Group=user
+WorkingDirectory=/home/user/leapFrog/orchestrator-node
+EnvironmentFile=/home/user/leapFrog/orchestrator-node/.env
+ExecStart=/home/user/leapFrog/orchestrator-node/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=3
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=false
+ReadWritePaths=/home/user/leapFrog/orchestrator-node/data
+
+[Install]
+WantedBy=multi-user.target

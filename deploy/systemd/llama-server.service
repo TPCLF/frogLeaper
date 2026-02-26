@@ -1,0 +1,17 @@
+[Unit]
+Description=llama.cpp Server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=user
+Group=user
+EnvironmentFile=/home/user/leapFrog/inference-node/.env
+ExecStart=/home/user/leapFrog/inference-node/scripts/run_llama_server.sh
+WorkingDirectory=/home/user/leapFrog/inference-node
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
